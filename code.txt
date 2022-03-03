@@ -1,0 +1,221 @@
+//to chane Celcius to Fahrenheit change temp = dht.readTemperature(); with temp = dht.readTemperature(true);
+#include "DHT.h"
+#define DHT11_PIN A0 //define Analog Pin
+#define DHTTYPE DHT11 //define DHT type
+
+DHT dht(DHT11_PIN, DHTTYPE);
+int temp;
+int a = 2;
+int b = 3;
+int c = 4;
+int d = 5;
+int e = 12;
+int f = 7;
+int g = 8;
+int GND1 = 6;
+int GND2 = 11;
+int GND3 = 10;
+int GND4 = 9;
+int digit_1 = 0;
+int digit_2 = 0;
+int digit_3 = 0;
+int digit_4 = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  dht.begin();
+  pinMode(a, OUTPUT);
+  pinMode(b, OUTPUT);
+  pinMode(c, OUTPUT);
+  pinMode(d, OUTPUT);
+  pinMode(e, OUTPUT);
+  pinMode(f, OUTPUT);
+  pinMode(g, OUTPUT);
+  pinMode(GND1, OUTPUT);
+  pinMode(GND2, OUTPUT);
+  pinMode(GND3, OUTPUT);
+  pinMode(GND4, OUTPUT);
+}
+
+void loop()
+{
+  //to chane Celcius to Fahrenheit change temp = dht.readTemperature(); with temp = dht.readTemperature(true);
+  temp = dht.readTemperature();
+  Serial.println(temp);
+    digit_1= temp/10; //first digit 21/10 = 2
+    digit_2= temp-(digit_1 * 10); //second digit 21-((21/10)*10) = 1
+    digit_3= 10; //o
+    digit_4= 11; //c last digit
+
+
+        digitalWrite( GND1, LOW);   
+        printNumber(digit_1);
+        delay(5);
+        digitalWrite( GND1, HIGH);
+
+        digitalWrite( GND2, LOW);   
+        printNumber(digit_2);
+        delay(5);
+        digitalWrite( GND2, HIGH);
+
+        digitalWrite( GND3, LOW);    
+        printNumber(digit_3);
+        delay(5);
+        digitalWrite( GND3, HIGH);
+        
+        digitalWrite( GND4, LOW);    
+        printNumber(digit_4);
+        delay(5);
+        digitalWrite( GND4, HIGH);
+
+}
+void printNumber(int x) {
+  switch (x) {
+    case 0: zero(); break;
+    case 1: one(); break;
+    case 2: two(); break;
+    case 3: three(); break;
+    case 4: four(); break;
+    case 5: five(); break;
+    case 6: six(); break;
+    case 7: seven(); break;
+    case 8: eight(); break;
+    case 9: nine(); break;
+    case 10: o(); break;
+    case 11: C(); break;
+  }
+}
+
+
+
+void zero()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, HIGH);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, LOW);
+}
+
+void one()
+{
+  digitalWrite( a, LOW);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, LOW);
+  digitalWrite( e, LOW);
+  digitalWrite( f, LOW);
+  digitalWrite( g, LOW);
+}
+
+void two()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, LOW);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, HIGH);
+  digitalWrite( f, LOW);
+  digitalWrite( g, HIGH);
+}
+
+void three()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, LOW);
+  digitalWrite( f, LOW);
+  digitalWrite( g, HIGH);
+}
+
+void four()
+{
+  digitalWrite( a, LOW);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, LOW);
+  digitalWrite( e, LOW);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+
+void five()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, LOW);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, LOW);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+
+void six()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, LOW);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, HIGH);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+
+void seven()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, LOW);
+  digitalWrite( e, LOW);
+  digitalWrite( f, LOW);
+  digitalWrite( g, LOW);
+}
+
+void eight()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, HIGH);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+
+void nine()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, HIGH);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, LOW);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+void o()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, HIGH);
+  digitalWrite( c, LOW);
+  digitalWrite( d, LOW);
+  digitalWrite( e, LOW);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, HIGH);
+}
+
+void C()
+{
+  digitalWrite( a, HIGH);
+  digitalWrite( b, LOW);
+  digitalWrite( c, LOW);
+  digitalWrite( d, HIGH);
+  digitalWrite( e, HIGH);
+  digitalWrite( f, HIGH);
+  digitalWrite( g, LOW);
+}
